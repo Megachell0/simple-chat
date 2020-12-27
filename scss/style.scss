@@ -1,0 +1,79 @@
+//@import "_nulifer";
+.main-app {
+    background-color: rgb(238, 238, 232);
+    height: 800px;
+    .row {
+        height: 100%;
+    }
+
+    .del-button {
+        width: 20px;
+        height: 20px;
+        border-width: 0;
+        background-image: url("https://image.flaticon.com/icons/png/512/106/106830.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+
+    .side-panel {
+        height: 100%;
+        .rooms {
+            background-color: #eeeee8;
+            max-height: 100%;
+        }
+    }
+
+    .chat-window {
+        height: 100%;
+        .chat {
+            display: flex;
+            height: 100%;
+            background-color: rgb(204, 204, 189);
+            //position: absolute;
+            width: 100%;
+            flex-direction: column;
+            justify-content: space-between;
+
+            .message-border {
+                height: 98%;
+            }
+            .message-box {
+                height: 97%;
+                width: 100%;
+                overflow: hidden;
+                .message {
+                    background-color: rgb(230, 230, 212);
+
+                    .message-info {
+                        .message-created {
+                            display: inline;
+                        }
+                    }
+                }
+            }
+            .chat-input {
+                width: 95%;
+            }
+        }
+    }
+    .login-form {
+        font-weight: 600;
+        font-size: 17px;
+        color: black;
+        background-color: #d8d7cc;
+    }
+}
+
+.slider {
+    &::-webkit-scrollbar {
+        width: 15px;
+        background-color: rgb(230, 227, 213);
+        border-radius: 3px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        height: 50px;
+        background-color: rgb(168, 166, 154);
+        border-radius: 3px;
+    }
+}
