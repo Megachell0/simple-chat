@@ -1,4 +1,5 @@
 //@import "_nulifer";
+
 .main-app {
     background-color: rgb(238, 238, 232);
     height: 800px;
@@ -75,5 +76,21 @@
         height: 50px;
         background-color: rgb(168, 166, 154);
         border-radius: 3px;
+    }
+}
+
+@media (max-width: 765px) {
+    .side-panel {
+        height: auto !important;
+        max-height: 40vh;
+    }
+    .chat-window {
+        height: 42% !important;
+    }
+    .main-app {
+        height: auto !important;
+    }
+    .main-app .chat-window .chat .message-box {
+        max-height: 80vh;
     }
 }

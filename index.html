@@ -30,13 +30,18 @@
                     class="d-inline-block align-top" alt="" loading="lazy">
                 Simple Chat
             </a>
-            <button type="button" class="btn btn-outline-secondary" @click="logout()"
-                v-if="authenticated">Logout</button>
+            <div class="account d-flex" v-if="authenticated">
+                <p class="my-auto mx-3">Привет, {{username}}</p>
+                <p class="my-auto mr-4" v-if="permissions == 'superuser' | permissions == 'staff'">Статус:
+                    {{permissions}}</p>
+                <button type="button" class="btn btn-outline-secondary" @click="logout()">Выход</button>
+            </div>
+
         </nav>
 
         <div class="main-app container col-md-10 mt-5 rounded-lg">
             <div class="row p-4">
-                <div class="side-panel px-2 col-md-3" v-if="authenticated">
+                <div class="side-panel px-2 col-md-4 col-xl-3" v-if="authenticated">
                     <div class="rooms rounded-lg d-flex flex-column justify-content-between">
 
                         <div class="list-group slider" style="overflow:auto; max-height: 90%; margin-bottom: 16px;">
@@ -44,9 +49,10 @@
                                 @click="select_room(room)" v-bind:class="{ active: (room.id == selected_room.id)}">
                                 <div class="d-flex w-100 justify-content-between">
                                     <h5>{{ room.title }}</h5>
-                                    <small>{{room.updated_at | room_date}}</small>
-                                    <small v-if="username == room.username"><button class="del-button align-middle ml-2"
-                                            @click="delete_room(room)"></button>
+                                    <!--<small>{{room.updated_at | room_date}}</small> -->
+                                    <small
+                                        v-if="username == room.username | permissions == 'superuser' | permissions == 'staff'"><button
+                                            class="del-button align-middle ml-2" @click="delete_room(room)"></button>
                                     </small>
                                 </div>
                             </a>
@@ -93,12 +99,12 @@
                     v-if="!authenticated">
                     <div class="login-form rounded-lg  flex-column p-3">
                         <div class="form-group">
-                            <label for="login-login">Login</label>
+                            <label for="login-login">Логин</label>
                             <input type="text" class="form-control" id="login-login" name="login" placeholder=""
                                 autocomplete="off">
                         </div>
                         <div class="form-group">
-                            <label for="login-password">Password</label>
+                            <label for="login-password">Пароль</label>
                             <input type="password" class="form-control" id="login-password" name="password"
                                 placeholder="">
                         </div>
@@ -114,7 +120,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="chat-window px-2 col-md-9" v-if="authenticated">
+                <div class="chat-window px-2 col-md-8 col-xl-9" v-if="authenticated">
                     <div class="chat rounded-lg ">
                         <div class="pt-3 overflow-hidden message-border">
                             <div class="p-3 message-box slider overflow-auto list-group">
@@ -127,7 +133,7 @@
                                                 {{ message.created_at | date}}</p>
                                             <button class="del-button align-middle ml-2"
                                                 @click="delete_message(message)"
-                                                v-if="username == message.username"></button>
+                                                v-if="username == message.username | permissions == 'superuser' | permissions == 'staff'"></button>
 
                                         </div>
                                     </div>

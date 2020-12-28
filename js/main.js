@@ -12,7 +12,7 @@ Vue.component("modal", {
 });
 
 const api_axios = axios.create({
-    baseURL: 'http://simple-chat-api-test.herokuapp.com/api/',
+    baseURL: 'https://simple-chat-api-test.herokuapp.com//api/',
     timeout: 3000,
 });
 
@@ -45,9 +45,20 @@ var app = new Vue({
                 }
             })
                 .then(response => {
-                    app.rooms_list = response.data
+
+                    sorted_rooms = response.data.sort(function (a, b) {
+                        var nameA = a.title.toLowerCase(), nameB = b.title.toLowerCase()
+                        if (nameA < nameB)
+                            return -1
+                        if (nameA > nameB)
+                            return 1
+                        return 0
+                    })
+
+
+                    app.rooms_list = sorted_rooms
                     if (!app.selected_room) {
-                        app.selected_room = response.data[0]
+                        app.selected_room = sorted_rooms[0]
                     }
                 })
                 .catch(error => {
@@ -204,6 +215,7 @@ var app = new Vue({
             })
                 .then(response => {
                     app.username = response.data.username
+                    app.permissions = response.data.permissions
                 })
                 .catch(error => {
                     console.log(error.response);
@@ -273,6 +285,7 @@ var app = new Vue({
         //showModal: false,
         authenticated: false,
         username: "",
+        permissions: "",
     },
 
     filters: {
