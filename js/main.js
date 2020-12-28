@@ -12,7 +12,7 @@ Vue.component("modal", {
 });
 
 const api_axios = axios.create({
-    baseURL: 'https://simple-chat-api-test.herokuapp.com//api/',
+    baseURL: 'https://simple-chat-api-test.herokuapp.com/api/',
     timeout: 3000,
 });
 
