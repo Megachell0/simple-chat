@@ -1,9 +1,4 @@
-window.VUE_DEVTOOLS_CONFIG = {
-    openInEditorHost: 'http://localhost:9000/'
-}
-
 alertify.set('notifier', 'position', 'top-right');
-
 
 
 
@@ -12,7 +7,7 @@ Vue.component("modal", {
 });
 
 const api_axios = axios.create({
-    baseURL: 'https://simple-chat-api-test.herokuapp.com//api/',
+    baseURL: 'https://simple-chat-api-test.herokuapp.com/api/',
     timeout: 3000,
 });
 
@@ -107,28 +102,32 @@ var app = new Vue({
         send_message: function () {
             field = document.getElementById("message-input")
             user_message = field.value
-
-            api_axios.post("messages/", {
-                content: user_message,
-                //user: user,
-                chat_room: this.selected_room.id,
-            }, {
-                headers: {
-                    Authorization: 'Bearer ' + localStorage.getItem('access_token'),
-                }
-            })
-                .then(response => {
-                    field.value = ''
-                    app.update_messages()
-                    app.update_rooms()
-                })
-                .catch(error => {
-                    if (error.response.status == 400) {
-                        alertify.error("Нельзя отправить пустое сообщение", 5);
-                    } else {
-                        alertify.error("Неполадки на сервере, пожалуйста подождите", 5);
+            if (user_message.length > 1499) {
+                alertify.error("Максимальная длина сообщения 1500 символов", 5);
+            } else if (user_message.length == 0) {
+                alertify.error("Нельзя отправить пустое сообщение", 5);
+            } else {
+                api_axios.post("messages/", {
+                    content: user_message,
+                    chat_room: this.selected_room.id,
+                }, {
+                    headers: {
+                        Authorization: 'Bearer ' + localStorage.getItem('access_token'),
                     }
-                });
+                })
+                    .then(response => {
+                        field.value = ''
+                        app.update_messages()
+                        app.update_rooms()
+                    })
+                    .catch(error => {
+                        if (error.response.status == 400) {
+                            alertify.error("Что то пошло не так..", 5);
+                        } else {
+                            alertify.error("Неполадки на сервере, пожалуйста подождите", 5);
+                        }
+                    });
+            }
         },
 
         login: function () {
@@ -143,6 +142,7 @@ var app = new Vue({
                     localStorage.setItem('access_token', response.data.access);
                     localStorage.setItem('refresh_token', response.data.refresh);
                     app.authenticated = true
+
                     app.get_user_data()
                     app.update_rooms()
 

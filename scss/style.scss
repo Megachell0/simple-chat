@@ -2,7 +2,7 @@
 
 .main-app {
     background-color: rgb(238, 238, 232);
-    height: 800px;
+    height: 80vh;
     .row {
         height: 100%;
     }
@@ -50,10 +50,17 @@
                             display: inline;
                         }
                     }
+                    .message-text {
+                        word-break: break-word;
+                    }
                 }
             }
             .chat-input {
                 width: 95%;
+                #message-input {
+                    height: 40px;
+                    min-height: 40px;
+                }
             }
         }
     }

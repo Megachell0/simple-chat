@@ -1,6 +1,6 @@
 .main-app {
   background-color: #eeeee8;
-  height: 800px;
+  height: 80vh;
 }
 
 .main-app .row {
@@ -63,8 +63,17 @@
   display: inline;
 }
 
+.main-app .chat-window .chat .message-box .message .message-text {
+  word-break: break-word;
+}
+
 .main-app .chat-window .chat .chat-input {
   width: 95%;
+}
+
+.main-app .chat-window .chat .chat-input #message-input {
+  height: 40px;
+  min-height: 40px;
 }
 
 .main-app .login-form {

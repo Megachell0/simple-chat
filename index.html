@@ -142,8 +142,11 @@
                             </div>
                         </div>
                         <div class="input-group mb-3 chat-input mx-auto">
-                            <input type="text" class="form-control" id="message-input" v-on:keyup.enter="send_message()"
-                                placeholder="Type message">
+                            <textarea class="form-control" id="message-input" v-on:keyup.enter="send_message()"
+                                placeholder="Type message"></textarea>
+                            <script type="application/javascript">
+                                autosize(document.getElementById("message-input"));
+                            </script>
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" @click="send_message()"
                                     type="button">Send</button>
@@ -154,14 +157,8 @@
 
             </div>
         </div>
-        <!--
-    <div class="alert alert-primary" role="alert">
-        A simple primary alert—check it out!
-    </div>
--->
     </div>
     <script src="js/main.js"></script>
-
 </body>
 
 </html>
